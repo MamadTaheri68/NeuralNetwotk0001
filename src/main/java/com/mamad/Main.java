@@ -1,4 +1,4 @@
-package com.mamad.nn;
+package main.java.com.mamad;
 
 public class Main {
 
