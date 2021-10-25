@@ -4,6 +4,8 @@ import com.mamad.activation.ActivationFunction;
 import com.mamad.data.MLData;
 import com.mamad.data.MLDataSet;
 import com.mamad.model.Neuron;
+import com.mamad.server.MultiLayerNetworkView;
+import fi.iki.elonen.NanoHTTPD;
 import main.java.com.mamad.activation.IActivationFunction;
 import main.java.com.mamad.activation.impl.LeakyRelu;
 import main.java.com.mamad.activation.impl.Sigmoid;
@@ -12,6 +14,7 @@ import main.java.com.mamad.activation.impl.TanH;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -131,6 +134,22 @@ public class Network {
         }
         logger.info("Input : "+ Arrays.toString(inputs) + " Predicted : " + Arrays.toString(output));
         return output;
+    }
+
+    public void runServerAt(int port) {
+
+        double[] layers = new double[3];
+        layers[0] = inputSize;
+        layers[1] = hiddenSize;
+        layers[2] = outputSize;
+
+        MultiLayerNetworkView.DATA_NETWORK = Arrays.toString(layers);
+        MultiLayerNetworkView networkView = new MultiLayerNetworkView(port);
+        try {
+            networkView.start(NanoHTTPD.SOCKET_READ_TIMEOUT,false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
