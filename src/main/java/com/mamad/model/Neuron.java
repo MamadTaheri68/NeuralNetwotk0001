@@ -21,6 +21,7 @@ public class Neuron {
     private main.java.com.mamad.activation.IActivationFunction activationFunction;
 
     public Neuron(){
+        this.neuronId = UUID.randomUUID();
         this.incomingConnections = new ArrayList<>();
         this.outgoingConnections = new ArrayList<>();
         this.bias = 1.0;
