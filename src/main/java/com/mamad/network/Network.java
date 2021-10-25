@@ -31,7 +31,7 @@ public class Network {
 
     private double learningRate = 0.01;
     private double momentum = 0.5;
-    private IActivationFunction activationFunction;
+    private IActivationFunction activationFunction = new Sigmoid(); // default activation function
 
     public Network(int inputSize, int hiddenSize, int outputSize) {
         this.inputSize = inputSize;
